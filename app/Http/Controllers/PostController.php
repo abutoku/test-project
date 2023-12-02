@@ -7,6 +7,14 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
+    public function index()
+    {
+//        $posts = Post::all();
+//        Eagerロードをつかう
+        $posts = Post::with('user')->get();
+        return view('post.index', compact('posts'));
+    }
+
     public function create()
     {
         return view('post.create');
@@ -18,6 +26,8 @@ class PostController extends Controller
             'title' => 'required|max:20',
             'body' => 'required|max:400',
         ]);
+
+        $validated['user_id'] = auth()->id();
 
         $post = Post::create($validated);
 
