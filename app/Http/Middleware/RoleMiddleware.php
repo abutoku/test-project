@@ -13,6 +13,8 @@ class RoleMiddleware
      *
      * @param \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response) $next
      */
+
+    // 追加したミドルウェア
     public function handle(Request $request, Closure $next): Response
     {
         if (auth()->user()->role == 'admin') {
