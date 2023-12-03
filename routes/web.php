@@ -20,15 +20,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', [TestController::class, 'test'])->name('test');
+// test
+//Route::get('/test', [TestController::class, 'test'])->name('test');
 
-Route::post('post', [PostController::class, 'store'])->name('post.store');
+// post
+//Route::post('post', [PostController::class, 'store'])->name('post.store');
+//Route::get('post/show/{post}', [PostController::class, 'show'])->name('post.show');
+//Route::get('post/{post}/edit', [PostController::class, 'edit'])->name('post.edit');
+//Route::patch('post/{post}', [PostController::class, 'update'])->name('post.update');
+//Route::delete('post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
+//Route::middleware(['auth','admin'])->group(function () {
+//    Route::get('post', [PostController::class, 'index'])->name('post.index');
+//    Route::get('post/create', [PostController::class, 'create']);
+//});
 
-Route::middleware(['auth','admin'])->group(function () {
-    Route::get('post', [PostController::class, 'index']);
-    Route::get('post/create', [PostController::class, 'create']);
-});
+Route::resource('post', PostController::class);
 
+// default
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
