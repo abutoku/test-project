@@ -12,7 +12,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('user')->get();
+        $posts = Post::with('user')->paginate(10);
         return view('post.index', compact('posts'));
     }
 
@@ -73,7 +73,7 @@ class PostController extends Controller
         $post->update($validated);
 
         $request->session()->flash('message', '更新しました');
-        return redirect()->route('post');
+        return redirect()->route('post.show', compact('post'));
     }
 
     /**
